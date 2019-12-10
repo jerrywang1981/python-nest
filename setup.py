@@ -7,7 +7,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="python-rest", # Replace with your own username
+    name="python-nestjs", # Replace with your own username
     version="0.0.1",
     author="Jerry Wang",
     author_email="wangjianjun@gmail.com",
