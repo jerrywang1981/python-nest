@@ -8,7 +8,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="python-nestjs", # Replace with your own username
-    version="0.0.1",
+    version="0.0.2",
     author="Jerry Wang",
     author_email="wangjianjun@gmail.com",
     description="The library for nest style microservice",
