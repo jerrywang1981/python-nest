@@ -3,6 +3,7 @@
 
 __author__ = 'Jerry Wang<wangjianjun@gmail.com>'
 import socketserver
+import functools
 from .TCPServer import MsTcpHandler
 
 
@@ -26,6 +27,21 @@ class NestMsServer():
             raise Exception('You have registered it before')
 
         MsTcpHandler.MS_HANDLERS[pattern_key] = message_handler
+
+    def message_pattern(self, pattern_name):
+        '''message pattern decorator'''
+        pattern_key = MsTcpHandler.get_key(pattern_name)
+
+        def decorator(func):
+            @functools.wraps(func)
+            def wrapper(payload):
+                return func(payload)
+
+            if pattern_key in MsTcpHandler.MS_HANDLERS:
+                raise Exception('You have registered it before')
+            MsTcpHandler.MS_HANDLERS[pattern_key] = wrapper
+            return wrapper
+        return decorator
 
     def run(self):
         '''run the server'''

@@ -30,7 +30,15 @@ class MsTcpHandler(socketserver.BaseRequestHandler):
         '''dispatch the pattern and payload'''
         pattern_key = self.get_key(self.pattern)
         if pattern_key in self.MS_HANDLERS:
-            return self.MS_HANDLERS[pattern_key].handle(self.payload)
+            try:
+                return self.MS_HANDLERS[pattern_key].handle(self.payload)
+            except Exception as e:
+                pass
+            try:
+                return self.MS_HANDLERS[pattern_key](self.payload)
+            except Exception as e:
+                pass
+
         raise Exception('no handler found')
 
     @classmethod
