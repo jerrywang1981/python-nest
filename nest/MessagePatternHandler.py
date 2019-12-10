@@ -4,7 +4,7 @@
 __author__ = 'Jerry Wang<wangjianjun@gmail.com>'
 
 
-class MessagePatterBaseHandler():
+class MessagePatternBaseHandler():
     '''base class for message pattern handler'''
     def __init__(self):
         pass
@@ -12,8 +12,8 @@ class MessagePatterBaseHandler():
     def get_message_pattern(self):
         '''return the message pattern
 
-        { cmd: UPDATE_JOB }
-        then this should return UPDATE_JOB
+        it can be string or dict
+        e.g. 'TEST' or {'cmd': 'test'}
         '''
         raise NotImplementedError
 
