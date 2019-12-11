@@ -11,12 +11,15 @@ class NestMsServer():
     '''Nest style microservice server
 
     '''
-    def __init__(self, host, port):
+    def __init__(self, host='0.0.0.0', port=None):
         self.host = host
-        if isinstance(port, str):
-            self.port = int(port)
+        if port:
+            if isinstance(port, str):
+                self.port = int(port)
+            else:
+                self.port = port
         else:
-            self.port = port
+            self.port = None
 
     def add_handler(self, message_handler_class):
         '''add handler'''
@@ -43,8 +46,9 @@ class NestMsServer():
             return wrapper
         return decorator
 
-    def run(self):
-        '''run the server'''
+    def run(self, host='0.0.0.0', port=None):
+        '''start to run the server'''
+        self.__init__(host, port)
         with socketserver.TCPServer((self.host, self.port), MsTcpHandler) as server:
             # Activate the server; this will keep running until you
             # interrupt the program with Ctrl-C
